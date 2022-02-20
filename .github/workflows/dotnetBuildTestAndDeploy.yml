@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: |
         dotnet build --configuration Release --no-restore
-        dotnet publish -c Release -o ../dotnet-webapp -r linux-x64 --self-contained true /p:UseAppHost=true
+        dotnet publish -c Release -o ../dotnet-webapp
     - name: Test
       run: |
         dotnet test './Tests/Tests.csproj' --no-restore --verbosity normal
