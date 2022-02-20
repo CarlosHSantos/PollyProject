@@ -8,7 +8,6 @@ on:
     
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'
-  DOTNET_VERSION: '5.0.301'
 
 jobs:
   build:
@@ -20,13 +19,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore      
     - name: Build
       run: |
         dotnet build --configuration Release --no-restore
-        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp' -r linux-x64
+        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp' --self-contained false /p:UseAppHost=true
     - name: Test
       run: |
         dotnet test './Tests/Tests.csproj' --no-restore --verbosity normal
