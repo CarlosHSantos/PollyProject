@@ -23,8 +23,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal  
-    - name: Publish PollyWebApi
-      run: dotnet publish -c Release -o 'PollyWebApi' 
+    - name: dotnet build and publish release mode
+      run: |
+        dotnet restore
+        dotnet build --configuration Release
+        dotnet publish -c Release -o 'PollyWebApi'
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v2
       with:
