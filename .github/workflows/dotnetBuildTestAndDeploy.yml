@@ -21,22 +21,17 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
-    - name: build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal  
-    - name: dotnet build and publish release mode
+      run: dotnet restore      
+    - name: Build
       run: |
-        dotnet restore
-        dotnet build --configuration Release
-        dotnet publish '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/PollyWebApi/PollyWebApi.csproj' -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Web'
-    - name: Azure WebApp
-      uses: Azure/webapps-deploy@v2
+        dotnet build --configuration Release --no-restore
+        dotnet publish -c Release -o ../dotnet-webapp -r linux-x64 --self-contained true /p:UseAppHost=true
+    - name: Test
+      run: |
+        dotnet test './Tests/Tests.csproj' --no-restore --verbosity normal
+    - uses: azure/webapps-deploy@v2
+      name: Deploy
       with:
-        # Name of the Azure Web App
         app-name: PollyApi
-        # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-        # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Web'
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp'
