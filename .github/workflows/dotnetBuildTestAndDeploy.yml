@@ -26,7 +26,7 @@ jobs:
     - name: Build
       run: |
         dotnet build --configuration Release --no-restore
-        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp' -r linux-x64 --self-contained false /p:UseAppHost=true
+        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp' -r linux-x64
     - name: Test
       run: |
         dotnet test './Tests/Tests.csproj' --no-restore --verbosity normal
