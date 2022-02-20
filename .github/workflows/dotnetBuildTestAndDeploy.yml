@@ -30,7 +30,7 @@ jobs:
       run: |
         dotnet restore
         dotnet build --configuration Release
-        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/PollyWebApi'
+        dotnet publish '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/PollyWebApi/PollyWebApi.csproj' -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Web'
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v2
       with:
