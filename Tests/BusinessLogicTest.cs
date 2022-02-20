@@ -13,7 +13,7 @@ using Polly.Fallback;
 using Polly.RateLimit;
 using Polly.Retry;
 using Polly.Timeout;
-using PollyProject;
+using PollyWebApi;
 using Xunit;
 
 namespace Tests

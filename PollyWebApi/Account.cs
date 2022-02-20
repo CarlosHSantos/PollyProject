@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PollyProject
+﻿namespace PollyWebApi
 {
     public class Account
     {

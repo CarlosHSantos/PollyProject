@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using PollyProject;
 
-namespace PollyProject
+namespace PollyWebApi
 {
     public interface IBasicClass
     {

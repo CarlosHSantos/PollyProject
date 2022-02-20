@@ -1,19 +1,12 @@
-﻿using Polly;
+﻿using System;
+using Polly;
 using Polly.CircuitBreaker;
 using Polly.Fallback;
 using Polly.Retry;
 using Polly.Timeout;
 using Polly.Wrap;
-using PollyProject;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace PollyProject
+namespace PollyWebApi
 {
     public class BusinessLogic
     {
@@ -76,7 +69,7 @@ namespace PollyProject
             {
                 return _policy.Execute(() => _epc.GetSomeNumber());
             }
-            catch (TimeoutRejectedException ex)
+            catch (TimeoutRejectedException)
             {
                 return 999;
             }

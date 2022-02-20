@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PollyProject
+namespace PollyWebApi
 {
     public class BasicClass : IBasicClass
     {

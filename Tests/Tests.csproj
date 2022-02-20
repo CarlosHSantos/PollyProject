@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Polly\PollyProject.csproj" />
+    <ProjectReference Include="..\PollyWebApi\PollyWebApi.csproj" />
   </ItemGroup>
 
 </Project>
