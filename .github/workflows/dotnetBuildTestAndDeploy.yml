@@ -8,6 +8,7 @@ on:
     
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'
+  DOTNET_VERSION: '5.0.301'
 
 jobs:
   build:
@@ -19,7 +20,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
       run: dotnet restore      
     - name: Build
