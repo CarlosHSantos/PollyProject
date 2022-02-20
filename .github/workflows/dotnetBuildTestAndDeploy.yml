@@ -20,13 +20,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: dotnet restore build and publish
-      run: |
-        dotnet restore
-        dotnet build --no-restore --configuration Release
-        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/PollyWebApi' 
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: build
+      run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal  
+    - name: Publish PollyWebApi
+      run: dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/PollyWebApi' 
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v2
       with:
